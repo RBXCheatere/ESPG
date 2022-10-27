@@ -107,15 +107,15 @@ function CreateEsp(Player)
     end)
 end
 
-for _,v in pairs(game:GetService("Players"):GetPlayers()) do
-   if v ~= game:GetService("Players").LocalPlayer then
+   for _,v in pairs(game:GetService("Workspace"):GetDescendants()) do 
+        if v.Name =="Humanoid" and v.Parent.Name == "Player" then
       CreateEsp(v)
       v.CharacterAdded:Connect(CreateEsp(v))
    end
 end
 
-game:GetService("Players").PlayerAdded:Connect(function(v)
-   if v ~= game:GetService("Players").LocalPlayer then
+   game.Workspace.DescendantAdded:Connect(function(v)
+      if v.Name == "Humanoid" and v.Parent.Name == "Player" then
       CreateEsp(v)
       v.CharacterAdded:Connect(CreateEsp(v))
    end
